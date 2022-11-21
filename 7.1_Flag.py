@@ -11,22 +11,22 @@ The record is 16! You will have to use some loops to achieve this.
 CHALLENGE: Can you make the entire flag parametrically? This means if I change the hoist to 520px the flag will resize accordingly.
 '''
 import arcade
-arcade.open_window(500,500, "Stars and Stripes")
-arcade.start_render()
+arcade.open_window(494, 260, "Stars and Stripes"), arcade.set_background_color(arcade.color.WHITE), arcade.start_render()
 
-arcade.draw_rectangle_filled(250,250,400,260,arcade.color.RED)
-# blue rectangle under stars
-ex = 15
-why = 100
-counter = 0
-for x in range(50):
-    arcade.draw_text(" * ", 39 + ex, 250 + why, arcade.color.WHITE, 20)
-    ex += 15
-    counter += 1
-    if counter == 10:
-        counter = 0
-        why -= 15
-        ex = 15
-# white stripes
-arcade.finish_render()
-arcade.run()
+for stripe in range(0, 260, 40):
+    arcade.draw_lrtb_rectangle_filled(0, 494, 20+stripe, 0+stripe, (191, 10, 48))
+    arcade.draw_lrtb_rectangle_filled(0, 197.6, 260, 120, (0, 40, 104))
+arcade.draw_rectangle_filled(0, 195, 400, 130, arcade.color_from_hex_string("#002868"))
+
+for star in range(0,5,1):
+    for horz in range (0,17,16):
+        for vert in range(226,110, -28):
+            for s2_off in range(12,179,32):
+                if ((horz)+(s2_off)) > 180:
+                    break
+                elif ((vert)-(horz)) < 110:
+                    break
+                else:
+                    arcade.draw_text("*", ((s2_off)+(horz)), ((vert)-((horz)-0.3*(horz))), arcade.color.WHITE, 20)
+# took a bit of inspiration from alumnis :)
+arcade.finish_render(), arcade.run()
